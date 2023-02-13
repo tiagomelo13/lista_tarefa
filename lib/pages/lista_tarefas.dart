@@ -14,6 +14,8 @@ class _ListaTarefasState extends State<ListaTarefas> {
   final TextEditingController listaController = TextEditingController();
 
   List<Todo> tarefas = [];
+  Todo? deletedTodo;
+  int? deletedTodoPos;
 
   @override
   Widget build(BuildContext context) {
@@ -130,8 +132,24 @@ class _ListaTarefasState extends State<ListaTarefas> {
   }
 
   void onDelete(Todo todo) {
+    deletedTodo = todo;
+    deletedTodoPos = tarefas.indexOf(todo);
     setState(() {
       tarefas.remove(todo);
     });
+    ScaffoldMessenger.of(context).clearSnackBars();
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text('Tarefa ${todo.title} removida!'),
+        action: SnackBarAction(
+          label: 'Desfazer',
+          onPressed: () {
+            setState(() {
+              tarefas.insert(deletedTodoPos!, deletedTodo!);
+            });
+          },
+        ),
+      ),
+    );
   }
 }

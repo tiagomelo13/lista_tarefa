@@ -42,10 +42,13 @@ class ListaItem extends StatelessWidget {
                     size: 20,
                   ),
                 ),
-                Text(
-                  DateFormat('dd/MM/yy  HH:mm:ss').format(todo.dateTime),
-                  style: TextStyle(
-                    fontSize: 12,
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                  child: Text(
+                    DateFormat('dd/MM/yy  HH:mm:ss').format(todo.dateTime),
+                    style: TextStyle(
+                      fontSize: 12,
+                    ),
                   ),
                 ),
               ],
