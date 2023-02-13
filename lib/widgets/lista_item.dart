@@ -1,12 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:intl/intl.dart';
 
 import '../models/todo.dart';
 
 class ListaItem extends StatelessWidget {
-  ListaItem({Key? key, required this.todo}) : super(key: key);
+  ListaItem({
+    Key? key,
+    required this.todo,
+    required this.onDelete,
+  }) : super(key: key);
 
   final Todo todo;
+  final Function(Todo) onDelete;
 
   @override
   Widget build(BuildContext context) {
@@ -23,19 +29,17 @@ class ListaItem extends StatelessWidget {
           children: [
             Row(
               children: [
-                Padding(
-                  padding: const EdgeInsets.all(10.0),
-                  child: ElevatedButton(
-                    onPressed: () {},
-                    style: ElevatedButton.styleFrom(
-                      primary: Color(0xff000000),
-                      padding: EdgeInsets.all(1.0),
-                      fixedSize: Size(5.0, 5.0)
-                    ),
-                    child: Icon(
-                      Icons.delete,
-
-                    ),
+                ElevatedButton(
+                  onPressed: () {
+                    onDelete(todo);
+                  },
+                  style: ElevatedButton.styleFrom(
+                    primary: Color(0xff000000),
+                    fixedSize: Size(20, 20),
+                  ),
+                  child: Icon(
+                    Icons.delete,
+                    size: 20,
                   ),
                 ),
                 Text(
@@ -47,7 +51,7 @@ class ListaItem extends StatelessWidget {
               ],
             ),
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 10),
+              padding: const EdgeInsets.symmetric(horizontal: 60),
               child: Text(
                 todo.title,
                 style: TextStyle(

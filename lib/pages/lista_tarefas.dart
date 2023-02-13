@@ -26,7 +26,8 @@ class _ListaTarefasState extends State<ListaTarefas> {
               mainAxisSize: MainAxisSize.min,
               children: [
                 Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 40.0, horizontal: 10.0),
+                  padding: const EdgeInsets.symmetric(
+                      vertical: 40.0, horizontal: 10.0),
                   child: Row(
                     children: [
                       Text(
@@ -89,6 +90,7 @@ class _ListaTarefasState extends State<ListaTarefas> {
                       for (Todo todo in tarefas)
                         ListaItem(
                           todo: todo,
+                          onDelete: onDelete,
                         ),
                     ],
                   ),
@@ -125,5 +127,11 @@ class _ListaTarefasState extends State<ListaTarefas> {
         ),
       ),
     );
+  }
+
+  void onDelete(Todo todo) {
+    setState(() {
+      tarefas.remove(todo);
+    });
   }
 }
