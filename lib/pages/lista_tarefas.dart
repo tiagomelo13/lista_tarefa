@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lista_tarefa/repositories/todo_repository.dart';
 import 'package:lista_tarefa/widgets/lista_item.dart';
 
 import '../models/todo.dart';
@@ -12,6 +13,7 @@ class ListaTarefas extends StatefulWidget {
 
 class _ListaTarefasState extends State<ListaTarefas> {
   final TextEditingController listaController = TextEditingController();
+  final TodoRepository todoRepository = TodoRepository();
 
   List<Todo> tarefas = [];
   Todo? deletedTodo;
@@ -71,9 +73,11 @@ class _ListaTarefasState extends State<ListaTarefas> {
                           }
 
                           listaController.clear();
+                          todoRepository.saveTodoList(tarefas);
+                          print(tarefas);
                         },
                         style: ElevatedButton.styleFrom(
-                          primary: Color(0xff000000),
+                          backgroundColor: Color(0xff000000),
                           padding: EdgeInsets.all(5),
                           fixedSize: Size(65, 40),
                         ),
@@ -114,7 +118,7 @@ class _ListaTarefasState extends State<ListaTarefas> {
                           });
                         },
                         style: ElevatedButton.styleFrom(
-                          primary: Color(0xff000000),
+                          backgroundColor: Color(0xff000000),
                           padding: EdgeInsets.all(5),
                           fixedSize: Size(65, 40),
                         ),
