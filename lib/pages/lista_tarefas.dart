@@ -20,6 +20,17 @@ class _ListaTarefasState extends State<ListaTarefas> {
   int? deletedTodoPos;
 
   @override
+  void initState(){
+    super.initState();
+
+    todoRepository.getTodoList().then((value){
+      setState(() {
+        tarefas = value;
+      });
+      });
+  }
+
+  @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
